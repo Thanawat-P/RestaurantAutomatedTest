@@ -12,6 +12,7 @@ class StaffAuthority{
         });
         const dropdown = row.locator('select');
         await dropdown.selectOption({ label: status });
+        await page.click('button:has-text("Save Status Changes →")')
     }
 }
 module.exports = {StaffAuthority}

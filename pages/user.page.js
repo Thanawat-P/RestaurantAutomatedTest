@@ -1,4 +1,4 @@
-class LoginPage {
+class UserAuthen {
   constructor(page) {
     this.page = page;
 
@@ -6,13 +6,24 @@ class LoginPage {
     this.usernameInput = '#username';
     this.passwordInput = '#password';
     this.loginButton = '#login';
+    this.emailInput = '#email'
     this.errorMessage = '.error';
   }
-
-  async goto() {
-    await this.page.goto('https://example.com/login');
+  async gotoRegister() {
+    await this.page.goto('https://example.com/register');
+  }
+  async register(username,password,email){
+    await this.page.fill(this.usernameInput,username);
+    await this.page.fill(this.passwordInput,password);
+    await this.page.fill(this.page.emailInput,email)
+    
+    await this.page.click('#register')
   }
 
+
+  async gotoLogin() {
+    await this.page.goto('https://example.com/login');
+  }
   async login(username, password) {
     await this.page.fill(this.usernameInput, username);
     await this.page.fill(this.passwordInput, password);
@@ -24,4 +35,4 @@ class LoginPage {
   }
 }
 
-module.exports = { LoginPage };
+module.exports = { LoginPage: UserAuthen };

@@ -13,10 +13,12 @@ class Reservation {
     }  
     async fillTableNTime(date,time,pax){
         await page.fill(this.dateInput, date);
-        await page.fill(this.timeInput, time);
+        await page.selectOption(this.timeInput, { label: time });
         await page.fill(this.numberInput, pax);
     }
-
+    async gotogotoAllReservations(){
+        await this.page.goto('https://example.com/reservation-all');
+    }
     async gotoAvailability() {
         await this.page.goto('https://example.com/availability');
     }
@@ -27,13 +29,12 @@ class Reservation {
     }
 
     async gotoReservation() {
-        await this.page.goto('https://example.com/availability');
+        await this.page.goto('https://example.com/reservation');
     }
-    async checkAvailability(date,time,pax,table) {
-        await page.click('button:has-text("Check Availability")');
+    async makeReservation(date,time,pax,table) {
         await page.fillTableNTime(date,time,pax);
         await page.selectOption(this.tableInput, table);
-        await page.click('button:has-text("Search →")');
+        await page.click('button:has-text("Confirm Reservation")');
     }
     
     async gotoWalkin(){
@@ -45,7 +46,7 @@ class Reservation {
         await page.fillTableNTime(date,time,pax);
         await page.selectOption(this.tableInput, table);
     }
-    
+
     async gotoMyReservation(){
         await this.page.goto('https://example.com/myreservation');
     }
